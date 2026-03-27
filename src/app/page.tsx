@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -45,8 +47,8 @@ export default function Home() {
       if (!res.ok) throw new Error("Failed to get suggestions");
       const json = await res.json();
       setResult(json);
-    } catch (e: any) {
-      setError(e.message || "Unknown error");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Unknown error");
     } finally {
       setLoading(false);
     }
